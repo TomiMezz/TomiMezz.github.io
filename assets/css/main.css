@@ -2573,6 +2573,26 @@ input, select, textarea {
 			line-height: 1.5em;
 			margin: 0;
 		}
+/* Works Item */
+
+.works-item {
+	margin: 0 0 2em 0;
+}
+
+	.works-item .image {
+		margin: 0 0 .5em 0;
+	}
+
+	.works-item h3 {
+		font-size: 1em;
+		margin: 0 0 0.5em 0;
+	}
+
+	.works-item p {
+		font-size: 0.8em;
+		line-height: 1.5em;
+		margin: 0;
+	}		
 
 /* Header */
 
@@ -2648,7 +2668,7 @@ input, select, textarea {
 
 		#header .image.avatar {
 			margin: 0 0 1em 0;
-			width: 6.25em;
+			width: 9.25em;
 		}
 
 /* Footer */
