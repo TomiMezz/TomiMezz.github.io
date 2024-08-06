@@ -94,7 +94,7 @@
 		// Avatar.
 		$window.on('load', function() {
 
-			$('#header').poptrox({});
+			$('.inner').poptrox({});
 
 		});
 
@@ -106,7 +106,7 @@
 		$window.on('load', function() {
 
 			$('#two').poptrox({
-				//caption: function($a) { return $a.next('h3').text(); },
+				caption: function($a) { return $a.next('h3').text(); },
 				caption: function($a) { return $a.attr('id'); },
 				overlayColor: '#2c2c2c',
 				overlayOpacity: 0.85,
