@@ -1,253 +1,586 @@
 <!DOCTYPE HTML>
 
 <html>
-	<head>
-		<title>Tomás Mezzabarba - portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="shortcut icon" href="favicon1.ico"> 
-	</head>
-	<body class="is-preload">
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="images/1_recortada.jpg" class="image avatar"><img src="images/1_recortada_cerca.jpg" alt="" /></a>
-					<h1><strong>Tomás Mezzabarba</strong></h1>
-					<h5>Sound Engineer</h5>
-				</div>
+<head>
+	<title>Tomás Mezzabarba - portfolio</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="shortcut icon" href="favicon1.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap"
+		rel="stylesheet">
+	<style>
+		/* ── Typewriter / monospace font ── */
+		body,
+		input,
+		select,
+		textarea {
+			font-family: 'DM Mono', 'Courier New', monospace;
+			font-size: 16pt;
+			line-height: 1.7em;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-family: 'DM Mono', 'Courier New', monospace;
+			font-weight: 500;
+		}
+
+		h1 {
+			font-size: 1.55em;
+		}
+
+		h2 {
+			font-size: 1.3em;
+		}
+
+		h3 {
+			font-size: 1em;
+			font-weight: 500;
+		}
+
+		/* Layout */
+		:root {
+			--sidebar-width: clamp(40rem, 29vw, 26rem);
+			--content-max-width: 76rem;
+			--section-gap: clamp(2.5rem, 4vw, 3.5rem);
+			--page-padding-inline: clamp(1.5rem, 4vw, 4rem);
+		}
+
+		html,
+		body {
+			overflow-x: hidden;
+		}
+
+		body {
+			min-height: 100vh;
+		}
+
+		#header {
+			width: var(--sidebar-width);
+			padding: clamp(3rem, 8vh, 6rem) clamp(1.5rem, 3vw, 3rem);
+		}
+
+		#header .inner,
+		#footer .outer {
+			max-width: 25rem;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#main {
+			margin-left: var(--sidebar-width);
+			width: calc(100% - var(--sidebar-width));
+			max-width: none;
+			padding: clamp(3rem, 8vh, 6rem) var(--page-padding-inline) clamp(2.5rem, 6vh, 4rem);
+		}
+
+		#main>section {
+			max-width: min(var(--content-max-width), 100%);
+			margin: var(--section-gap) auto 0;
+			padding-top: var(--section-gap);
+		}
+
+		#main>section:first-child {
+			margin-top: 0;
+			padding-top: 0;
+		}
+
+		/* ── Projects section ── */
+		#two {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding-bottom: 0;
+		}
+
+		#two .row {
+			margin-right: 0;
+		}
+
+		#two .row> :last-child {
+			margin-bottom: 0;
+		}
+
+		#three {
+			margin-top: clamp(2rem, 4vw, 3rem);
+			padding-top: clamp(2rem, 4vw, 3rem);
+		}
+
+		#three>.row {
+			justify-content: center;
+		}
+
+		#three .contact-column {
+			width: 100%;
+			max-width: 48rem;
+		}
+
+		#three form {
+			margin-bottom: 0;
+		}
+
+		@media screen and (max-width: 1280px) {
+			:root {
+				--sidebar-width: clamp(18rem, 31vw, 23rem);
+				--content-max-width: 68rem;
+			}
+		}
+
+		@media screen and (max-width: 980px) {
+			#header {
+				width: 100%;
+				padding: 5rem clamp(1.5rem, 5vw, 4rem) 3.5rem;
+			}
+
+			#main {
+				margin-left: 0;
+				width: 100%;
+				padding: 3.5rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
+			}
+
+			#main>section {
+				max-width: 100%;
+				margin-top: 2.75rem;
+				padding-top: 2.75rem;
+			}
+
+			#three .contact-column {
+				max-width: 100%;
+			}
+		}
+
+		@media screen and (max-width: 736px) {
+			#header {
+				padding: 3.25rem 1.5rem 2.25rem;
+			}
+
+			#main {
+				padding: 2.25rem 1.5rem 1.5rem;
+			}
+
+			#main>section {
+				margin-top: 2.25rem;
+				padding-top: 2.25rem;
+			}
+		}
+
+		/* ── Video Modal ── */
+		#video-modal-overlay {
+			display: none;
+			position: fixed;
+			inset: 0;
+			z-index: 9999;
+			background: rgba(0, 0, 0, 0.85);
+			backdrop-filter: blur(6px);
+			-webkit-backdrop-filter: blur(6px);
+			justify-content: center;
+			align-items: center;
+		}
+
+		#video-modal-overlay.active {
+			display: flex;
+			animation: fadeInOverlay 0.3s ease;
+		}
+
+		@keyframes fadeInOverlay {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		#video-modal-box {
+			position: relative;
+			width: 90%;
+			max-width: 860px;
+			background: #111;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+			animation: scaleInBox 0.3s ease;
+		}
+
+		@keyframes scaleInBox {
+			from {
+				transform: scale(0.92);
+				opacity: 0;
+			}
+
+			to {
+				transform: scale(1);
+				opacity: 1;
+			}
+		}
+
+		#video-modal-box video {
+			width: 100%;
+			display: block;
+			max-height: 80vh;
+			object-fit: contain;
+			background: #000;
+		}
+
+		#video-modal-close {
+			position: absolute;
+			top: 10px;
+			right: 14px;
+			background: rgba(255, 255, 255, 0.12);
+			border: none;
+			color: #fff;
+			font-size: 1.4rem;
+			line-height: 1;
+			width: 34px;
+			height: 34px;
+			border-radius: 50%;
+			cursor: pointer;
+			transition: background 0.2s;
+			z-index: 10;
+		}
+
+		#video-modal-close:hover {
+			background: rgba(255, 255, 255, 0.28);
+		}
+	</style>
+</head>
+
+<body class="is-preload">
+
+	<!-- Header -->
+	<header id="header">
+		<div class="inner">
+			<a href="images/1_recortada.jpg" class="image avatar"><img src="images/1_recortada_cerca.jpg" alt="" /></a>
+			<h1><strong>Tomás Mezzabarba</strong></h1>
+			<h5>Sound Engineer | Digital Artist</h5>
+		</div>
+	</header>
+
+	<!-- Main -->
+	<div id="main">
+
+		<!-- One -->
+		<section id="one">
+			<header class="major">
+				<h1>Hi! I'm Tomás,</h1>
 			</header>
+			<p>
+				I am an advanced Sound Engineering student focused on acoustics, electroacoustic systems,
+				digital signal processing and audio-oriented software development.
+			</p>
 
-		<!-- Main -->
-			<div id="main">
+			<p>
+				I currently work in production and development at a MIDI controller company, where I am involved
+				in technical processes related to hardware, product assembly, testing and audio/MIDI-oriented workflows.
+				In parallel, I am developing my final degree thesis on broadband acoustic metadiffusers, combining
+				parametric design, acoustic modeling, simulation and experimental validation.
+			</p>
 
-				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<h1>Hi! I'm Tomás,</h1>
-						</header>
-						<p>An advanced student of the Sound Engineering career with special interest in the area of digital signal processing, as well as in the design, development and study of electroacoustic systems.</p>
-						<p>I currently work as a sound operator technician for live events and at the same time I am designing different projects related to analog audio electronics. In addition, as a hobby I dedicate myself to making digital art designs.</p>
-						
+			<p>
+				My work connects sound engineering, software tools, measurements, analog audio electronics and 3D
+				design.
+				I am especially interested in projects where acoustics, technology and practical implementation meet.
+			</p>
+
+			<ul class="actions">
+				<li><a href="https://drive.google.com/file/d/1g2D4wFfMibrRw-UE6-fLvgM1zGiSiFaV/view?usp=sharing"
+						class="button" target="_blank">Learn More</a></li>
+				<li><a href="#" id="btn-watch-video" class="button">&#9654; Watch Video</a></li>
+			</ul>
+		</section>
+
+		<!-- Two -->
+		<section id="two">
+			<h2>Technical Projects</h2>
+			<div class="row">
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1KvjloEboFQhGENuGTbgYsjpLX91cjPfU/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/Aura.png" alt="" /></a>
+					<h3>AURALYZER: Digital Osiclloscope Development</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1S4bHOA-TjF05DOIdG0XlVMCI8U8zofxq/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/SUGIRA_FINAL.png" alt="" /></a>
+					<h3>SUGIRA: 3D RIR Software Development</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1kiYSFPn5Vs-PkkT1_BgVm84z8MmQtqdz/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/mic_medicion.png" alt="" /></a>
+					<h3>Control room diagnosis</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1JeP2ILwQh7hwdIsR9OOWnQui15umsvhF/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/Gabinete.png" alt="" /></a>
+					<h3>Design of Bass Reflex enclosure</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1JKA44AgpcoyYh37s0JYva0fMKwMl7v5M/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/Driver_Horn_1.png" alt="" /></a>
+					<h3>Driver plus horn system measurement and analysis</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1pF_FtM6KhO_eOqYdNQvBGRH9JZbnvOu0/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/BASS_REFLEX.png" alt="" /></a>
+					<h3>Measurement and analysis of an acoustic cabinet</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1DCYw8rgULuyAFNkfbn_04titRpb5W4dV/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/delay_1.png" alt="" /></a>
+					<h3>Design & Manufacture - Digital Delay with SMT</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/16vGNm47JaVyiq1Ikwj6MbQO9p3hzca2N/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/PHASER-TOP_2.png" alt="" /></a>
+					<h3>Design & Manufacture - Phase90</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1hUFEA9R6iod7hmeJwSewdwLMxaf5xU3v/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/STFT.png" alt="" /></a>
+					<h3>Watermarks with SVD and STFT</h3>
+					<p></p>
+				</article>
+				<article class="col-6 col-12-xsmall works-item">
+					<a href="https://drive.google.com/file/d/1Sf7rf6gzYViscOJI2Xkp30pLHEjd9GUK/view?usp=sharing"
+						class="image fit thumb" target="_blank"><img src="images/thumbs/tubes.png" alt="" /></a>
+					<h3>Design - Guitar Valve Preamp</h3>
+					<p></p>
+				</article>
+				<article class="col-12 work-item">
+					<a href="images/fulls/BLIND/31.webp" class="image fit thumb" id='Gargantua' target="_blank"><img
+							src="images/thumbs/BLIND_MELT.png" alt="" /></a>
+					<h3>Digital Art</h3>
+				</article>
+				<!-- IMAGENES BLIND -->
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/35.webp" class="image fit thumb" id='The path of light - 2'
+						target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/36.webp" class="image fit thumb" id='The path of light - 3'
+						target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/33.webp" class="image fit thumb" id='Gestation' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/30.webp" class="image fit thumb" id='Melt Glass' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/32.webp" class="image fit thumb" id='Moon - 1' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/43.webp" class="image fit thumb" id='Moon - 2' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/39.webp" class="image fit thumb" id='Jupiter - 1' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/38.webp" class="image fit thumb" id='Jupiter - 2' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/37.webp" class="image fit thumb" id='Jupiter - 3' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/41.webp" class="image fit thumb" id='Nebula - 1' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/42.webp" class="image fit thumb" id='Nebula - 2' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/40.webp" class="image fit thumb" id='Starway To Something'
+						target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/0.jpg" class="image fit thumb" id='Starway To Something'
+						target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/1.jpg" class="image fit thumb" id='Starway To Something'
+						target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/29.jpg" class="image fit thumb" id='10,000 days' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/24.png" class="image fit thumb" id='Far From Heaven'
+						target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/25.jpg" class="image fit thumb" id='Abyss' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/26.png" class="image fit thumb" id='Éter' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/27.png" class="image fit thumb" id='Eyes' target="_blank"></a>
+				</article>
+
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/3.jpg" class="image fit thumb" id='Y Vivir De Tu Encanto'
+						target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/5.jpg" class="image fit thumb" id='Look' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/6.jpg" class="image fit thumb" id='Look' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/8.jpg" class="image fit thumb" id='Alone' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/10.jpg" class="image fit thumb" id='Supremacy' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/11.jpg" class="image fit thumb" id='Supremacy' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/12.jpg" class="image fit thumb" id='Peace' target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/15.jpg" class="image fit thumb" id="Business" target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/18.jpg" class="image fit thumb" id="Business" target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/19.png" class="image fit thumb" id="Business" target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/20.png" class="image fit thumb" id="Business" target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/21.png" class="image fit thumb" id="Business" target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/22.png" class="image fit thumb" id="Lost" target="_blank"></a>
+				</article>
+				<article class="col-6 col-12-xsmall work-item">
+					<a href="images/fulls/BLIND/23.png" class="image fit thumb" id="Black Hole" target="_blank"></a>
+				</article>
+			</div>
+
+
+		</section>
+
+		<!-- Three -->
+		<section id="three">
+			<h2>Get In Touch</h2>
+			<div class="row">
+				<div class="col-12 contact-column">
+
+					<form action="https://formsubmit.co/tmezzabarba@gmail.com" method="POST">
+						<div class="row gtr-uniform gtr-50">
+							<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name"
+									placeholder="Name" /></div>
+							<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email"
+									placeholder="Email" /></div>
+							<div class="col-12"><textarea name="message" id="message" placeholder="Message"
+									rows="4"></textarea></div>
+						</div>
+
+
+						<input type="hidden" name="_next" value="https://tomimezz.github.io/">
+						<input type="hidden" name="_captcha" value="false">
+
 						<ul class="actions">
-							<li><a href="https://drive.google.com/file/d/1g2D4wFfMibrRw-UE6-fLvgM1zGiSiFaV/view?usp=sharing" class="button" target="_blank">Learn More</a></li>
+							<li><input type="submit" value="Send Message" /></li>
 						</ul>
-					</section>
 
-				<!-- Two -->
-					<section id="two">
-						<h2>Projects</h2>
-						<div class="row">
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1KvjloEboFQhGENuGTbgYsjpLX91cjPfU/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/Aura.png" alt="" /></a>
-								<h3>AURALYZER: Digital Osiclloscope Development</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1S4bHOA-TjF05DOIdG0XlVMCI8U8zofxq/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/SUGIRA_FINAL.png" alt="" /></a>
-								<h3>SUGIRA: 3D RIR Software Development</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1kiYSFPn5Vs-PkkT1_BgVm84z8MmQtqdz/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/mic_medicion.png" alt="" /></a>
-								<h3>Control room diagnosis</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1JeP2ILwQh7hwdIsR9OOWnQui15umsvhF/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/Gabinete.png" alt="" /></a>
-								<h3>Design of Bass Reflex enclosure</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1JKA44AgpcoyYh37s0JYva0fMKwMl7v5M/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/Driver_Horn_1.png" alt="" /></a>
-								<h3>Driver plus horn system measurement and analysis</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1pF_FtM6KhO_eOqYdNQvBGRH9JZbnvOu0/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/BASS_REFLEX.png" alt="" /></a>
-								<h3>Measurement and analysis of an acoustic cabinet</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1DCYw8rgULuyAFNkfbn_04titRpb5W4dV/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/delay_1.png" alt="" /></a>
-								<h3>Design & Manufacture - Digital Delay with SMT</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/16vGNm47JaVyiq1Ikwj6MbQO9p3hzca2N/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/PHASER-TOP_2.png" alt="" /></a>
-								<h3>Design & Manufacture - Phase90</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1hUFEA9R6iod7hmeJwSewdwLMxaf5xU3v/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/STFT.png" alt="" /></a>
-								<h3>Watermarks with SVD and STFT</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall works-item">
-								<a href="https://drive.google.com/file/d/1Sf7rf6gzYViscOJI2Xkp30pLHEjd9GUK/view?usp=sharing" class="image fit thumb" target="_blank"><img src="images/thumbs/tubes.png" alt="" /></a>
-								<h3>Design - Guitar Valve Preamp</h3>
-								<p></p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/31.webp" class="image fit thumb" id='Gargantua' target="_blank"><img src="images/thumbs/BLIND_MELT.png" alt="" /></a>
-								<h3>Digital Art</h3>
-							</article>
-							<!-- IMAGENES BLIND -->
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/35.webp" class="image fit thumb" id='The path of light - 2' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/36.webp" class="image fit thumb" id='The path of light - 3' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/33.webp" class="image fit thumb" id='Gestation' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/30.webp" class="image fit thumb" id='Melt Glass' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/32.webp" class="image fit thumb" id='Moon - 1' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/43.webp" class="image fit thumb" id='Moon - 2' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/39.webp" class="image fit thumb" id='Jupiter - 1' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/38.webp" class="image fit thumb" id='Jupiter - 2' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/37.webp" class="image fit thumb" id='Jupiter - 3' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/41.webp" class="image fit thumb" id='Nebula - 1' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/42.webp" class="image fit thumb" id='Nebula - 2' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/40.webp" class="image fit thumb" id='Starway To Something' target="_blank"></a>								
-							</article>	 
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/0.jpg" class="image fit thumb" id='Starway To Something' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/1.jpg" class="image fit thumb" id='Starway To Something' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/29.jpg" class="image fit thumb" id='10,000 days' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/24.png" class="image fit thumb" id='Far From Heaven' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/25.jpg" class="image fit thumb" id='Abyss' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/26.png" class="image fit thumb" id='Éter' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/27.png" class="image fit thumb" id='Eyes' target="_blank"></a>								
-							</article>
-							
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/3.jpg" class="image fit thumb" id='Y Vivir De Tu Encanto' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/5.jpg" class="image fit thumb" id='Look' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/6.jpg" class="image fit thumb" id='Look' target="_blank"></a>								
-							</article>										
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/8.jpg" class="image fit thumb" id='Alone' target="_blank"></a>								
-							</article>	
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/10.jpg" class="image fit thumb" id='Supremacy' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/11.jpg" class="image fit thumb" id='Supremacy' target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/12.jpg" class="image fit thumb" id='Peace' target="_blank"></a>								
-							</article>	
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/15.jpg" class="image fit thumb" id="Business" target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/18.jpg" class="image fit thumb" id="Business" target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/19.png" class="image fit thumb" id="Business" target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/20.png" class="image fit thumb" id="Business" target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/21.png" class="image fit thumb" id="Business" target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/22.png" class="image fit thumb" id="Lost" target="_blank"></a>								
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="images/fulls/BLIND/23.png" class="image fit thumb" id="Black Hole" target="_blank"></a>								
-							</article>
-						</div>
-						
-						
-					</section>
+					</form>
 
-				<!-- Three -->
-					<section id="three">
-						<h2>Get In Touch</h2>
-						<p></p>
-						<div class="row">
-							<div class="col-8 col-12-small">
-								
-								<form action="https://formsubmit.co/tmezzabarba@gmail.com" method="POST">	
-									<div class="row gtr-uniform gtr-50">
-										<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="Name" /></div>
-										<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="Email" /></div>
-										<div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="4"></textarea></div>
-									</div>
-									
 
-									<input type="hidden" name="_next" value="https://tomimezz.github.io/">
-									<input type="hidden" name="_captcha" value="false">
-
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" /></li>
-									</ul>
-
-								</form>
-								
-								
-							</div>
-							
-						</div>
-					</section>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="outer">
-					<ul class="icons">
-						<li><a href="https://www.linkedin.com/in/tomas-mezzabarba/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://github.com/TomiMezz" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
-						<li><a href="https://www.instagram.com/tomi_mezz/" class="icon brands fa-instagram" target="_blank"><span class="label">Instagram</span></a></li>
-						<li><a href="mailto:tmezzabarba@gmail.com" class="icon solid fa-envelope" target="_blank"><span class="label">Email</span></a></li>
-					</ul>
 				</div>
-			</footer>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			</div>
+		</section>
+	</div>
 
-	</body>
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="outer">
+			<ul class="icons">
+				<li><a href="https://www.linkedin.com/in/tomas-mezzabarba/" class="icon brands fa-linkedin"
+						target="_blank"><span class="label">LinkedIn</span></a></li>
+				<li><a href="https://github.com/TomiMezz" class="icon brands fa-github" target="_blank"><span
+							class="label">Github</span></a></li>
+				<li><a href="https://www.instagram.com/tomi_mezz/" class="icon brands fa-instagram"
+						target="_blank"><span class="label">Instagram</span></a></li>
+				<li><a href="mailto:tmezzabarba@gmail.com" class="icon solid fa-envelope" target="_blank"><span
+							class="label">Email</span></a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- Video Modal -->
+	<div id="video-modal-overlay" role="dialog" aria-modal="true" aria-label="Video player">
+		<div id="video-modal-box">
+			<button id="video-modal-close" aria-label="Close video">&times;</button>
+			<!-- Reemplazá el src con la ruta real del video cuando lo tengas listo -->
+			<video id="portfolio-video" controls preload="none">
+				<source src="videos/intro.mp4" type="video/mp4" />
+				Tu navegador no soporta el elemento de video.
+			</video>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.poptrox.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script>
+		(function () {
+			var overlay = document.getElementById('video-modal-overlay');
+			var video = document.getElementById('portfolio-video');
+			var btnOpen = document.getElementById('btn-watch-video');
+			var btnClose = document.getElementById('video-modal-close');
+
+			function openModal() {
+				overlay.classList.add('active');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeModal() {
+				overlay.classList.remove('active');
+				video.pause();
+				document.body.style.overflow = '';
+			}
+
+			btnOpen.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+			btnClose.addEventListener('click', closeModal);
+
+			// Cerrar al hacer click fuera del box
+			overlay.addEventListener('click', function (e) {
+				if (e.target === overlay) closeModal();
+			});
+
+			// Cerrar con ESC
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Escape') closeModal();
+			});
+		})();
+	</script>
+
+</body>
+
 </html>
