@@ -223,11 +223,12 @@
 			}
 		}
 
-		#video-modal-box video {
+		#video-modal-box iframe {
 			width: 100%;
 			display: block;
+			aspect-ratio: 16 / 9;
 			max-height: 80vh;
-			object-fit: contain;
+			border: none;
 			background: #000;
 		}
 
@@ -533,10 +534,13 @@
 	<div id="video-modal-overlay" role="dialog" aria-modal="true" aria-label="Video player">
 		<div id="video-modal-box">
 			<button id="video-modal-close" aria-label="Close video">&times;</button>
-			<video id="portfolio-video" controls preload="none">
-				<source src="videos/Port.mp4" type="video/mp4" />
-				Tu navegador no soporta el elemento de video.
-			</video>
+			<iframe
+				id="portfolio-video"
+				src="https://www.youtube.com/embed/I8fWLBBnwSk?rel=0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen
+				title="Portfolio video"
+			></iframe>
 		</div>
 	</div>
 
@@ -550,7 +554,8 @@
 	<script>
 		(function () {
 			var overlay = document.getElementById('video-modal-overlay');
-			var video = document.getElementById('portfolio-video');
+			var iframe  = document.getElementById('portfolio-video');
+			var iframeSrc = iframe.src;
 			var btnOpen = document.getElementById('btn-watch-video');
 			var btnClose = document.getElementById('video-modal-close');
 
@@ -561,7 +566,9 @@
 
 			function closeModal() {
 				overlay.classList.remove('active');
-				video.pause();
+				// Detiene la reproducción reseteando el src del iframe
+				iframe.src = '';
+				iframe.src = iframeSrc;
 				document.body.style.overflow = '';
 			}
 
